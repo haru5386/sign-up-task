@@ -79,6 +79,10 @@ body {
   justify-content: center;
   align-items: center;
   font-family: "Interstate", "LiGothic", "FangSong", Arial, serif;
+  @include phone {
+    display: block;
+    background-color: $white;
+  }
 }
 
 .card-form {
@@ -88,11 +92,17 @@ body {
   background-color: $white;
   @extend %standard-boxshadow;
   // border: 1px solid #000;
+  @include phone {
+    width: 100%;
+  }
   .back {
     padding: 30px;
   }
   .main-content{
     padding: 0px 105px 36px 105px;
+    @include phone {
+      padding: 0px 22px 36px 22px;
+  }
   }
   .sing-up-method{
     font-size: 13px;

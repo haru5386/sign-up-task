@@ -21,7 +21,7 @@
         <h1 class="title">Create an account</h1>
       </div>
       <div class="sing-up-method d-flex justify-content-between">
-        <button class="btn">
+        <button class="btn" @click.prevent="prompt">
           <div class="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@
           </div>
           Sign up with Google
         </button>
-        <button class="btn">
+        <button class="btn" @click.prevent="prompt">
           <div class="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
