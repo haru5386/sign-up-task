@@ -181,10 +181,7 @@
           </div>
           <p>One number</p>
         </div>
-        <div
-          v-else
-          class="one-number d-flex align-items-center ml-4"
-        >
+        <div v-else class="one-number d-flex align-items-center ml-4">
           <div class="alert-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -212,7 +209,9 @@
           Service and Notification settings.</label
         >
       </div>
-      <button type="submit" class="btn submit" @click="submitForm()">Create an Free Account!</button>
+      <button type="submit" class="btn submit" @click="submitForm()">
+        Create an Free Account!
+      </button>
       <p class="login">
         Already have an account?
         <a href="#">Log in</a>
@@ -263,25 +262,21 @@ export default {
         this.hideImg = hideGray;
       }
     },
-    submitForm(){
+    submitForm() {
       if (!this.firstName | !this.lastName | !this.email | !this.password) {
-        alert('請勿留白')
-      }
-      else if (!this.verificationMin | !this.verificationNum){
-        alert('請確認密碼')
-      }
-      else if(!this.check){
-        alert('請同意條款')
-      }
-      else {
+        alert("請勿留白");
+      } else if (!this.verificationMin | !this.verificationNum) {
+        alert("請確認密碼");
+      } else if (!this.check) {
+        alert("請同意條款");
+      } else {
         console.log(`first name: ${this.firstName}
        last name: ${this.lastName}
        email: ${this.email}
-       password: ${this.password}`)
-       alert('成功創建帳號！')
+       password: ${this.password}`);
+        alert("成功創建帳號！");
       }
-    }
+    },
   },
 };
 </script>
-
