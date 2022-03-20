@@ -1,5 +1,5 @@
 # Sign Up Page
-專案使用 Vue.js 刻出的入頁面。<br /><br />
+使用 Vue.js 做出的登入頁面。<br /><br />
 [點我瀏覽](https://haru5386.github.io/sign-up-task/)
 
 ## 產品功能如下：
