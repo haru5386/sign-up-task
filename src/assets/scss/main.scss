@@ -32,9 +32,10 @@ input{
     background-color: $light-blue;
     border-radius: 5px;
     height: 55px;
-    padding: 11px;
+    padding: 19px 11px;
     font-size: 14px;
     margin-bottom: 12px;
+    width: 100%;
 }
 input[type="checkbox"] {
       -webkit-appearance: none;
@@ -131,22 +132,75 @@ body {
     p {
       font-size: 14px;
       font-weight: 400;
-      width: 55%;
+      flex-grow: 0;
+      flex-shrink: 0;
     }
     .line {
       height: 1px;
-      width: 45%;
+      flex-grow: 1;
+      flex-shrink: 1;
       background-color: $black;
+      margin-left: 3px;
     }
   }
-  input.lastName,input.firstName {
-    width: calc(50% - 5px);
+  .name{
+    display: flex;
+    width: 100%;
+  }
+  .lastName,.firstName,.email {
+    position: relative;
+    width: 100%;
   }
   .lastName {
     margin-left: 10px;
   }
-    input.email,input.password {
-    width: 100%;
+
+  .edit span.placeholder{
+    display: none;
+  }
+  .edit span.title-s{
+    display: inline-block;
+  }
+  .edit input{
+    padding: 27px 11px 11px 11px;
+  }
+  .password.edit input{
+    padding: 20px 11px 11px 11px;
+  }
+  span.placeholder{
+      display: inline-block;
+      position: absolute;
+      top: 20px;
+      left: 11px;
+      z-index: 100;
+      font-size: 14px;
+      color: $dark-gray;
+    }
+  span.title-s{
+    display: none;
+    z-index: 99;
+    position: absolute;
+    left: 11px;
+    top: 10px;
+    font-size: 10px;
+    color: $dark-gray;
+  }
+  .password {
+    position: relative;
+    margin: 0;
+    img {
+      position: absolute;
+      right: 10px;
+      top: 24px;
+      width: 19px;
+      height: 12px;
+    }
+    .show-password{
+      position: absolute;
+      left: 11px;
+      top: 36px;
+      font-size: 10px;
+    }
   }
   .policy-check {
     font-size: 13px;

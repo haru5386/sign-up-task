@@ -1,5 +1,5 @@
 <template>
-  <form class="card-form">
+  <form class="card-form" @submit.prevent>
     <div class="back">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -58,36 +58,67 @@
         <p>Or use your email for registration</p>
         <div class="line"></div>
       </div>
-      <input
-        class="firstName"
-        type="text"
-        name="firstName"
-        placeholder="First Name"
-        v-model="firstName"
-      />
-      <input
-        type="text"
-        class="lastName"
-        name="lastName"
-        placeholder="Last Name"
-        v-model="lastName"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        v-model="email"
-        class="email"
-      />
-      <input
-        class="password"
-        type="password"
-        name="password"
-        placeholder="Password"
-        v-model="password"
-      />
+      <div class="name">
+        <div
+          class="firstName"
+          :class="{ edit: firstName || focus === 'firstName' }"
+        >
+          <input
+            @click="inputFocus('firstName')"
+            @blur="inputFocus('')"
+            type="text"
+            name="firstName"
+            v-model="firstName"
+          />
+          <span class="placeholder">First Name</span>
+          <span class="title-s">First Name</span>
+        </div>
+        <div
+          class="lastName"
+          :class="{ edit: lastName || focus === 'lastName' }"
+        >
+          <input
+            @click="inputFocus('lastName')"
+            @blur="inputFocus('')"
+            type="text"
+            name="lastName"
+            v-model="lastName"
+          />
+          <span class="placeholder">Last Name</span>
+          <span class="title-s">Last Name</span>
+        </div>
+      </div>
+
+      <div class="email" :class="{ edit: email || focus === 'email' }">
+        <input
+          type="email"
+          name="email"
+          v-model="email"
+          @click="inputFocus('email')"
+          @blur="inputFocus('')"
+        />
+        <span class="placeholder">Email</span>
+        <span class="title-s">Email</span>
+      </div>
+
+      <div class="password" :class="{ edit: password || focus === 'password' }">
+        <input
+          @click="inputFocus('password')"
+          @blur="inputFocus('')"
+          type="password"
+          name="password"
+          v-model="password"
+        />
+        <img :src="hideImg" alt="" @click="showingPassword()" />
+        <span class="placeholder">Password</span>
+        <span class="title-s">Password</span>
+        <span v-if="showPassword" class="show-password">{{ password }}</span>
+      </div>
       <div class="alert d-flex">
-        <div class="characters-min d-flex align-items-center">
+        <div
+          v-if="verificationMin"
+          class="characters-min d-flex align-items-center"
+        >
           <div class="alert-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +138,30 @@
           </div>
           <p>8 Characters min.</p>
         </div>
-        <div class="one-number d-flex align-items-center ml-4">
+        <div v-else class="characters-min d-flex align-items-center">
+          <div class="alert-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="11"
+              height="11"
+              viewBox="0 0 11 11"
+              fill="#ABABAB"
+            >
+              <circle cx="5.5" cy="5.5" r="5.5" fill="#ABABAB" />
+              <path
+                d="M3 6.18182L5.08333 8L8 4"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <p style="color: #ababab">8 Characters min.</p>
+        </div>
+        <div
+          v-if="verificationNum"
+          class="one-number d-flex align-items-center ml-4"
+        >
           <div class="alert-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -127,6 +181,29 @@
           </div>
           <p>One number</p>
         </div>
+        <div
+          v-else
+          class="one-number d-flex align-items-center ml-4"
+        >
+          <div class="alert-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="11"
+              height="11"
+              viewBox="0 0 11 11"
+              fill="#ababab"
+            >
+              <circle cx="5.5" cy="5.5" r="5.5" fill="#ababab" />
+              <path
+                d="M3 6.18182L5.08333 8L8 4"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <p style="color: #ababab">One number</p>
+        </div>
       </div>
       <div class="policy-check d-flex align-items-center">
         <input type="checkbox" name="policy" id="policy" v-model="check" />
@@ -135,7 +212,7 @@
           Service and Notification settings.</label
         >
       </div>
-      <button type="submit" class="btn submit">Create an Free Account!</button>
+      <button type="submit" class="btn submit" @click="submitForm()">Create an Free Account!</button>
       <p class="login">
         Already have an account?
         <a href="#">Log in</a>
@@ -145,6 +222,9 @@
 </template>
 
 <script>
+import hideBlue from "../assets/img/hide-blue.svg";
+import hideGray from "../assets/img/hide-gray.svg";
+
 export default {
   name: "Card",
   data() {
@@ -154,7 +234,53 @@ export default {
       email: "",
       password: "",
       check: false,
+      hideImg: hideGray,
+      focus: "",
+      showPassword: false,
+      verificationMin: false,
+      verificationNum: false,
     };
+  },
+  watch: {
+    password: function (newValue) {
+      let regMin = /^[A-Za-z\d#?!@$%^&*-]{8,}$/;
+      let regNum = /^(?=.*\d)[A-Za-z\d#?!@$%^&*-]{1,}$/;
+      this.verificationMin = regMin.test(newValue);
+      this.verificationNum = regNum.test(newValue);
+      console.log("NUM" + this.verificationNum);
+      console.log("MIN" + this.verificationMin);
+    },
+  },
+  methods: {
+    inputFocus(input) {
+      this.focus = input;
+    },
+    showingPassword() {
+      this.showPassword = !this.showPassword;
+      if (this.showPassword) {
+        this.hideImg = hideBlue;
+      } else {
+        this.hideImg = hideGray;
+      }
+    },
+    submitForm(){
+      if (!this.firstName | !this.lastName | !this.email | !this.password) {
+        alert('請勿留白')
+      }
+      else if (!this.verificationMin | !this.verificationNum){
+        alert('請確認密碼')
+      }
+      else if(!this.check){
+        alert('請同意條款')
+      }
+      else {
+        console.log(`first name: ${this.firstName}
+       last name: ${this.lastName}
+       email: ${this.email}
+       password: ${this.password}`)
+       alert('成功創建帳號！')
+      }
+    }
   },
 };
 </script>
