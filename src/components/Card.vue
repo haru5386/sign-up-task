@@ -21,7 +21,10 @@
         <h1 class="title">Create an account</h1>
       </div>
       <div class="sing-up-method d-flex justify-content-between">
-        <button class="btn" @click.prevent="prompt">
+        <button class="btn">
+                    <a
+            href="https://accounts.google.com/signin/v2/identifier?passive=1209600&continue=https%3A%2F%2Faccounts.google.com%2F%3Fhl%3Dzh-TW&followup=https%3A%2F%2Faccounts.google.com%2F%3Fhl%3Dzh-TW&hl=zh-TW&flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+          >
           <div class="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,22 +39,28 @@
             </svg>
           </div>
           Sign up with Google
+          </a>
         </button>
-        <button class="btn" @click.prevent="prompt">
-          <div class="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="22"
-              viewBox="0 0 12 22"
-              fill="currentColor"
-            >
-              <path
-                d="M9.66391 3.65291H11.6723V0.154909C11.3258 0.107242 10.1342 -7.62939e-06 8.74633 -7.62939e-06C5.85058 -7.62939e-06 3.86692 1.82141 3.86692 5.16908V8.24999H0.671416V12.1605H3.86692V22H7.78475V12.1614H10.851L11.3377 8.25091H7.78383V5.55683C7.78475 4.42658 8.08908 3.65291 9.66391 3.65291Z"
-              />
-            </svg>
-          </div>
-          Sign up with Facebook
+
+        <button class="btn">
+          <a
+            href="https://zh-tw.facebook.com/login/device-based/regular/login/?login_attempt=1"
+          >
+            <div class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="22"
+                viewBox="0 0 12 22"
+                fill="currentColor"
+              >
+                <path
+                  d="M9.66391 3.65291H11.6723V0.154909C11.3258 0.107242 10.1342 -7.62939e-06 8.74633 -7.62939e-06C5.85058 -7.62939e-06 3.86692 1.82141 3.86692 5.16908V8.24999H0.671416V12.1605H3.86692V22H7.78475V12.1614H10.851L11.3377 8.25091H7.78383V5.55683C7.78475 4.42658 8.08908 3.65291 9.66391 3.65291Z"
+                />
+              </svg>
+            </div>
+            Sign up with Facebook
+          </a>
         </button>
       </div>
       <div class="divider">

@@ -16,7 +16,6 @@ h2 {
 }
 
 .btn {
-  width: 190px;
   height: 55px;
   text-align: center;
   text-decoration: none;
@@ -109,15 +108,26 @@ body {
     font-size: 13px;
     display: flex;
     .btn{
+     width: 48%;
       display: flex;
       align-items: center;
       margin: 20px 0px 0px 0px;
-      &:hover{
-      @include color($white, $dark-blue);
-      @extend %button-boxshadow;
-      .icon {
-        @include color($white, $dark-blue)
+      a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 400;
+        color: $black;
       }
+      &:hover{
+        @include color($white, $dark-blue);
+        @extend %button-boxshadow;
+        .icon {
+          @include color($white, $dark-blue)
+        }
+        a {
+          color: $white;
+        }
     }
     }
     .icon {
